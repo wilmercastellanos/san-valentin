@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Cata 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family: 'Segoe UI', sans-serif;
+    text-align:center;
+    overflow:hidden;
+}
+
+.card{
+    background:white;
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    position:relative;
+    z-index:2;
+    max-width:400px;
+}
+
+h1{
+    color:#ff4d6d;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+#yes:hover{
+    transform:scale(1.1);
+}
+
+#no{
+    background:#555;
+    color:white;
+    position:absolute;
+}
+
+.counter{
+    margin-top:15px;
+    font-size:15px;
+    color:#444;
+}
+
+.heart{
+    position:absolute;
+    color:#ff4d6d;
+    animation:float 4s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-800px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>💖 Cata mi amorcito 💖</h1>
+    <p>Desde el 9 de noviembre de 2025 mi vida es más bonita ✨</p>
+    <p>¿Quieres ser mi San Valentín? 💌</p>
+
+    <button id="yes" onclick="aceptar()">Sí mi amor 💕</button>
+    <button id="no" onmouseover="mover()">No es una opción 😤</button>
+
+    <div class="counter" id="contador"></div>
+</div>
+
+<script>
+
+// Fecha inicio relación
+const fechaInicio = new Date("2025-11-09T00:00:00");
+
+function actualizarContador(){
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferencia / 1000) % 60);
+
+    document.getElementById("contador").innerHTML =
+        `Llevamos juntos:<br>💞 ${dias} días ${horas} horas ${minutos} minutos ${segundos} segundos 💞`;
+}
+
+setInterval(actualizarContador,1000);
+
+function aceptar(){
+    document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#ff758c,#ff7eb3);color:white;font-size:28px;text-align:center;">
+        💖 Sabía que dirías que sí Cata mi amorcito 😍<br><br>
+        Eres lo mejor que me ha pasado ❤️
+    </div>
+    `;
+    corazones();
+}
+
+function mover(){
+    let boton = document.getElementById("no");
+    boton.style.top = Math.random()*80 + "%";
+    boton.style.left = Math.random()*80 + "%";
+}
+
+function corazones(){
+    setInterval(()=>{
+        let heart = document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"%";
+        heart.style.bottom="0";
+        heart.style.fontSize=Math.random()*30+20+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    },300);
+}
+
+actualizarContador();
+</script>
+
+</body>
+</html>
